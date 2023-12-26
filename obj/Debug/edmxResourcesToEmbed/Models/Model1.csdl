@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Hotel_IPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Checkout">
+    <Key>
+      <PropertyRef Name="invoice_id" />
+    </Key>
+    <Property Name="invoice_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cardholder_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="visa_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cvv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="expire_date" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="cust_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="phone_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="points" Type="Int32" />
+    <Property Name="cardholder_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="card_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cvv" Type="Int32" />
+    <Property Name="exp_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="guest_rest" Relationship="Self.FK_guest_rest_Guest" FromRole="Guest" ToRole="guest_rest" />
+    <NavigationProperty Name="Occasions" Relationship="Self.FK_Occasion_Guest" FromRole="Guest" ToRole="Occasion" />
+    <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Guest" FromRole="Guest" ToRole="Room" />
+    <NavigationProperty Name="Packages" Relationship="Self.guest_pack" FromRole="Guest" ToRole="Package" />
+    <NavigationProperty Name="Reservations" Relationship="Self.guest_reserv" FromRole="Guest" ToRole="Reservation" />
+    <NavigationProperty Name="Transportations" Relationship="Self.guest_transp" FromRole="Guest" ToRole="Transportation" />
+    <NavigationProperty Name="Trips" Relationship="Self.guest_trip" FromRole="Guest" ToRole="Trip" />
+  </EntityType>
+  <EntityType Name="guest_rest">
+    <Key>
+      <PropertyRef Name="cust_id" />
+      <PropertyRef Name="rest_id" />
+    </Key>
+    <Property Name="cust_id" Type="Int32" Nullable="false" />
+    <Property Name="rest_id" Type="Int32" Nullable="false" />
+    <Property Name="rest_time" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Guest" Relationship="Self.FK_guest_rest_Guest" FromRole="guest_rest" ToRole="Guest" />
+    <NavigationProperty Name="Restaurant" Relationship="Self.FK_guest_rest_Restaurant" FromRole="guest_rest" ToRole="Restaurant" />
+  </EntityType>
+  <EntityType Name="Gym">
+    <Key>
+      <PropertyRef Name="serv_id" />
+    </Key>
+    <Property Name="serv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serv_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Trainers" Relationship="Self.FK_Trainer_Gym" FromRole="Gym" ToRole="Trainer" />
+  </EntityType>
+  <EntityType Name="Occasion">
+    <Key>
+      <PropertyRef Name="occ_id" />
+    </Key>
+    <Property Name="occ_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="capacity" Type="Int32" />
+    <Property Name="occ_price" Type="Int32" />
+    <Property Name="occ_date" Type="DateTime" Precision="0" />
+    <Property Name="cust_id" Type="Int32" />
+    <NavigationProperty Name="Guest" Relationship="Self.FK_Occasion_Guest" FromRole="Occasion" ToRole="Guest" />
+    <NavigationProperty Name="Halls" Relationship="Self.FK_Hall_Occasion" FromRole="Occasion" ToRole="Hall" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="pack_id" />
+    </Key>
+    <Property Name="pack_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pack_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pack_descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pack_price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Guests" Relationship="Self.guest_pack" FromRole="Package" ToRole="Guest" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="reserv_id" />
+    </Key>
+    <Property Name="reserv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stdate" Type="DateTime" Precision="0" />
+    <Property Name="endate" Type="DateTime" Precision="0" />
+    <Property Name="pay_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="total_price" Type="Int32" />
+    <NavigationProperty Name="Guests" Relationship="Self.guest_reserv" FromRole="Reservation" ToRole="Guest" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="rest_id" />
+    </Key>
+    <Property Name="rest_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="rest_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="no_tables" Type="Int32" />
+    <Property Name="rest_date" Type="DateTime" Precision="0" />
+    <Property Name="rest_review" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="guest_rest" Relationship="Self.FK_guest_rest_Restaurant" FromRole="Restaurant" ToRole="guest_rest" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="room_no" Type="Int32" />
+    <Property Name="room_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="room_price" Type="Int32" />
+    <Property Name="room_view" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="meals" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="room_stdate" Type="DateTime" Precision="0" />
+    <Property Name="room_endate" Type="DateTime" Precision="0" />
+    <Property Name="room_review" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="add_req" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cust_id" Type="Int32" />
+    <NavigationProperty Name="Guest" Relationship="Self.FK_Room_Guest" FromRole="Room" ToRole="Guest" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Trainer">
+    <Key>
+      <PropertyRef Name="trainer_id" />
+    </Key>
+    <Property Name="trainer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gym_id" Type="Int32" />
+    <NavigationProperty Name="Gym" Relationship="Self.FK_Trainer_Gym" FromRole="Trainer" ToRole="Gym" />
+  </EntityType>
+  <EntityType Name="Transportation">
+    <Key>
+      <PropertyRef Name="transp_id" />
+    </Key>
+    <Property Name="transp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="no_of_hours" Type="Int32" />
+    <Property Name="capacity" Type="Int32" />
+    <Property Name="price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Guests" Relationship="Self.guest_transp" FromRole="Transportation" ToRole="Guest" />
+  </EntityType>
+  <EntityType Name="Trip">
+    <Key>
+      <PropertyRef Name="trip_id" />
+    </Key>
+    <Property Name="trip_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="trip_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="trip_date" Type="DateTime" Precision="0" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="time" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="trip_review" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Guests" Relationship="Self.guest_trip" FromRole="Trip" ToRole="Guest" />
+  </EntityType>
+  <EntityType Name="Hall">
+    <Key>
+      <PropertyRef Name="hall_id" />
+    </Key>
+    <Property Name="hall_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hall_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="max_capacity" Type="Int32" />
+    <Property Name="hall_date" Type="DateTime" Precision="0" />
+    <Property Name="occ_id" Type="Int32" />
+    <NavigationProperty Name="Occasion" Relationship="Self.FK_Hall_Occasion" FromRole="Hall" ToRole="Occasion" />
+  </EntityType>
+  <Association Name="FK_guest_rest_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="guest_rest" Type="Self.guest_rest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="guest_rest">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Occasion_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
+    <End Role="Occasion" Type="Self.Occasion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="Occasion">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_rest_Restaurant">
+    <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="guest_rest" Type="Self.guest_rest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="rest_id" />
+      </Principal>
+      <Dependent Role="guest_rest">
+        <PropertyRef Name="rest_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trainer_Gym">
+    <End Role="Gym" Type="Self.Gym" Multiplicity="0..1" />
+    <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gym">
+        <PropertyRef Name="serv_id" />
+      </Principal>
+      <Dependent Role="Trainer">
+        <PropertyRef Name="gym_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hall_Occasion">
+    <End Role="Occasion" Type="Self.Occasion" Multiplicity="0..1" />
+    <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occasion">
+        <PropertyRef Name="occ_id" />
+      </Principal>
+      <Dependent Role="Hall">
+        <PropertyRef Name="occ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="guest_pack">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+  </Association>
+  <Association Name="guest_reserv">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+  </Association>
+  <Association Name="guest_transp">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <End Role="Transportation" Type="Self.Transportation" Multiplicity="*" />
+  </Association>
+  <Association Name="guest_trip">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Hotel_IPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Checkouts" EntityType="Self.Checkout" />
+    <EntitySet Name="Guests" EntityType="Self.Guest" />
+    <EntitySet Name="guest_rest" EntityType="Self.guest_rest" />
+    <EntitySet Name="Gyms" EntityType="Self.Gym" />
+    <EntitySet Name="Occasions" EntityType="Self.Occasion" />
+    <EntitySet Name="Packages" EntityType="Self.Package" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Trainers" EntityType="Self.Trainer" />
+    <EntitySet Name="Transportations" EntityType="Self.Transportation" />
+    <EntitySet Name="Trips" EntityType="Self.Trip" />
+    <EntitySet Name="Halls" EntityType="Self.Hall" />
+    <AssociationSet Name="FK_guest_rest_Guest" Association="Self.FK_guest_rest_Guest">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="guest_rest" EntitySet="guest_rest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Occasion_Guest" Association="Self.FK_Occasion_Guest">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="Occasion" EntitySet="Occasions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_Guest" Association="Self.FK_Room_Guest">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_rest_Restaurant" Association="Self.FK_guest_rest_Restaurant">
+      <End Role="Restaurant" EntitySet="Restaurants" />
+      <End Role="guest_rest" EntitySet="guest_rest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trainer_Gym" Association="Self.FK_Trainer_Gym">
+      <End Role="Gym" EntitySet="Gyms" />
+      <End Role="Trainer" EntitySet="Trainers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hall_Occasion" Association="Self.FK_Hall_Occasion">
+      <End Role="Occasion" EntitySet="Occasions" />
+      <End Role="Hall" EntitySet="Halls" />
+    </AssociationSet>
+    <AssociationSet Name="guest_pack" Association="Self.guest_pack">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="guest_reserv" Association="Self.guest_reserv">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="Reservation" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="guest_transp" Association="Self.guest_transp">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="Transportation" EntitySet="Transportations" />
+    </AssociationSet>
+    <AssociationSet Name="guest_trip" Association="Self.guest_trip">
+      <End Role="Guest" EntitySet="Guests" />
+      <End Role="Trip" EntitySet="Trips" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+</Schema>

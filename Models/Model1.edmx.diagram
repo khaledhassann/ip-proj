@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c63e556140684e8da5bfe3d1dc1322d3" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="Hotel_IPModel.Checkout" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Guest" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.guest_rest" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Gym" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Occasion" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Package" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Reservation" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Restaurant" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Room" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.sysdiagram" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Trainer" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Transportation" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Trip" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_IPModel.Hall" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="Hotel_IPModel.FK_guest_rest_Guest" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.FK_Occasion_Guest" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.FK_Room_Guest" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.FK_guest_rest_Restaurant" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.FK_Trainer_Gym" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.FK_Hall_Occasion" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.guest_pack" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.guest_reserv" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.guest_transp" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_IPModel.guest_trip" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,130 @@
+﻿@model WebApplication4.Models.Guest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Guest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.birthdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birthdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.points)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cardholder_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cardholder_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.card_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.card_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cvv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cvv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exp_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exp_date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cust_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

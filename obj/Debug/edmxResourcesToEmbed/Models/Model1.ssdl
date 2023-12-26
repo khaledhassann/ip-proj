@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Hotel_IPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Checkout">
+    <Key>
+      <PropertyRef Name="invoice_id" />
+    </Key>
+    <Property Name="invoice_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cardholder_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="visa_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cvv" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="expire_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="nationality" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="50" />
+    <Property Name="birthdate" Type="date" Nullable="false" />
+    <Property Name="phone_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="points" Type="int" />
+    <Property Name="cardholder_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="card_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="cvv" Type="int" />
+    <Property Name="exp_date" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'Hotel_IP.dbo.guest_gym' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="guest_gym">
+          <Property Name="serv_id" Type="int" />
+          <Property Name="cust_id" Type="int" />
+        </EntityType>-->
+  <EntityType Name="guest_pack">
+    <Key>
+      <PropertyRef Name="cust_id" />
+      <PropertyRef Name="pack_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="pack_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="guest_reserv">
+    <Key>
+      <PropertyRef Name="reserv_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="reserv_id" Type="int" Nullable="false" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="guest_rest">
+    <Key>
+      <PropertyRef Name="cust_id" />
+      <PropertyRef Name="rest_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="rest_id" Type="int" Nullable="false" />
+    <Property Name="rest_time" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+  </EntityType>
+  <EntityType Name="guest_transp">
+    <Key>
+      <PropertyRef Name="cust_id" />
+      <PropertyRef Name="transp_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="transp_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="guest_trip">
+    <Key>
+      <PropertyRef Name="cust_id" />
+      <PropertyRef Name="trip_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="trip_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gym">
+    <Key>
+      <PropertyRef Name="serv_id" />
+    </Key>
+    <Property Name="serv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="serv_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="time" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Hotel_IP.dbo.Hall' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Hall">
+    <Key>
+      <PropertyRef Name="hall_id" />
+    </Key>
+    <Property Name="hall_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hall_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="max_capacity" Type="int" />
+    <Property Name="hall_date" Type="date" />
+    <Property Name="occ_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Occasion">
+    <Key>
+      <PropertyRef Name="occ_id" />
+    </Key>
+    <Property Name="occ_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+    <Property Name="capacity" Type="int" />
+    <Property Name="occ_price" Type="int" />
+    <Property Name="occ_date" Type="date" />
+    <Property Name="cust_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="pack_id" />
+    </Key>
+    <Property Name="pack_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pack_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="pack_descrip" Type="nvarchar" MaxLength="50" />
+    <Property Name="pack_price" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="reserv_id" />
+    </Key>
+    <Property Name="reserv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stdate" Type="date" />
+    <Property Name="endate" Type="date" />
+    <Property Name="pay_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="total_price" Type="int" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="rest_id" />
+    </Key>
+    <Property Name="rest_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+    <Property Name="rest_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="no_tables" Type="int" />
+    <Property Name="rest_date" Type="date" />
+    <Property Name="rest_review" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="room_no" Type="int" />
+    <Property Name="room_type" Type="nvarchar" MaxLength="50" />
+    <Property Name="room_price" Type="int" />
+    <Property Name="room_view" Type="nvarchar" MaxLength="50" />
+    <Property Name="meals" Type="nvarchar" MaxLength="50" />
+    <Property Name="room_stdate" Type="date" />
+    <Property Name="room_endate" Type="date" />
+    <Property Name="room_review" Type="nvarchar" MaxLength="50" />
+    <Property Name="add_req" Type="nvarchar" MaxLength="50" />
+    <Property Name="cust_id" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Trainer">
+    <Key>
+      <PropertyRef Name="trainer_id" />
+    </Key>
+    <Property Name="trainer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="phone_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="gym_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Transportation">
+    <Key>
+      <PropertyRef Name="transp_id" />
+    </Key>
+    <Property Name="transp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" />
+    <Property Name="no_of_hours" Type="int" />
+    <Property Name="capacity" Type="int" />
+    <Property Name="price" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Trip">
+    <Key>
+      <PropertyRef Name="trip_id" />
+    </Key>
+    <Property Name="trip_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="trip_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="trip_date" Type="date" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="time" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="price" Type="int" />
+    <Property Name="destination" Type="nvarchar" MaxLength="50" />
+    <Property Name="trip_review" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+error 6004: The table 'Hotel_IP.dbo.guest_gym' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_guest_gym_Guest" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'Hotel_IP.dbo.guest_gym' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_guest_gym_Gym" />-->
+  <Association Name="FK_guest_pack_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="guest_pack" Type="Self.guest_pack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="guest_pack">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_pack_Package">
+    <End Role="Package" Type="Self.Package" Multiplicity="1" />
+    <End Role="guest_pack" Type="Self.guest_pack" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="pack_id" />
+      </Principal>
+      <Dependent Role="guest_pack">
+        <PropertyRef Name="pack_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_reserv_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="guest_reserv" Type="Self.guest_reserv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="guest_reserv">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_reserv_Reservation">
+    <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+    <End Role="guest_reserv" Type="Self.guest_reserv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservation">
+        <PropertyRef Name="reserv_id" />
+      </Principal>
+      <Dependent Role="guest_reserv">
+        <PropertyRef Name="reserv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_rest_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="guest_rest" Type="Self.guest_rest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="guest_rest">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_rest_Restaurant">
+    <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="guest_rest" Type="Self.guest_rest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurant">
+        <PropertyRef Name="rest_id" />
+      </Principal>
+      <Dependent Role="guest_rest">
+        <PropertyRef Name="rest_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_transp_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="guest_transp" Type="Self.guest_transp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="guest_transp">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_transp_Transportation">
+    <End Role="Transportation" Type="Self.Transportation" Multiplicity="1" />
+    <End Role="guest_transp" Type="Self.guest_transp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transportation">
+        <PropertyRef Name="transp_id" />
+      </Principal>
+      <Dependent Role="guest_transp">
+        <PropertyRef Name="transp_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_trip_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="guest_trip" Type="Self.guest_trip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="guest_trip">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_guest_trip_Trip">
+    <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+    <End Role="guest_trip" Type="Self.guest_trip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="trip_id" />
+      </Principal>
+      <Dependent Role="guest_trip">
+        <PropertyRef Name="trip_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hall_Occasion">
+    <End Role="Occasion" Type="Self.Occasion" Multiplicity="0..1" />
+    <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occasion">
+        <PropertyRef Name="occ_id" />
+      </Principal>
+      <Dependent Role="Hall">
+        <PropertyRef Name="occ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Occasion_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
+    <End Role="Occasion" Type="Self.Occasion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="Occasion">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Room_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="0..1" />
+    <End Role="Room" Type="Self.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="cust_id" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="cust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trainer_Gym">
+    <End Role="Gym" Type="Self.Gym" Multiplicity="0..1" />
+    <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gym">
+        <PropertyRef Name="serv_id" />
+      </Principal>
+      <Dependent Role="Trainer">
+        <PropertyRef Name="gym_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Hotel_IPModelStoreContainer">
+    <EntitySet Name="Checkout" EntityType="Self.Checkout" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="guest_pack" EntityType="Self.guest_pack" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="guest_reserv" EntityType="Self.guest_reserv" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="guest_rest" EntityType="Self.guest_rest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="guest_transp" EntityType="Self.guest_transp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="guest_trip" EntityType="Self.guest_trip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gym" EntityType="Self.Gym" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Occasion" EntityType="Self.Occasion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trainer" EntityType="Self.Trainer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transportation" EntityType="Self.Transportation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hall" EntityType="Self.Hall" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Hall].[hall_id] AS [hall_id], 
+    [Hall].[hall_name] AS [hall_name], 
+    [Hall].[max_capacity] AS [max_capacity], 
+    [Hall].[hall_date] AS [hall_date], 
+    [Hall].[occ_id] AS [occ_id]
+    FROM [dbo].[Hall] AS [Hall]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_guest_pack_Guest" Association="Self.FK_guest_pack_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="guest_pack" EntitySet="guest_pack" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_pack_Package" Association="Self.FK_guest_pack_Package">
+      <End Role="Package" EntitySet="Package" />
+      <End Role="guest_pack" EntitySet="guest_pack" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_reserv_Guest" Association="Self.FK_guest_reserv_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="guest_reserv" EntitySet="guest_reserv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_reserv_Reservation" Association="Self.FK_guest_reserv_Reservation">
+      <End Role="Reservation" EntitySet="Reservation" />
+      <End Role="guest_reserv" EntitySet="guest_reserv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_rest_Guest" Association="Self.FK_guest_rest_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="guest_rest" EntitySet="guest_rest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_rest_Restaurant" Association="Self.FK_guest_rest_Restaurant">
+      <End Role="Restaurant" EntitySet="Restaurant" />
+      <End Role="guest_rest" EntitySet="guest_rest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_transp_Guest" Association="Self.FK_guest_transp_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="guest_transp" EntitySet="guest_transp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_transp_Transportation" Association="Self.FK_guest_transp_Transportation">
+      <End Role="Transportation" EntitySet="Transportation" />
+      <End Role="guest_transp" EntitySet="guest_transp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_trip_Guest" Association="Self.FK_guest_trip_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="guest_trip" EntitySet="guest_trip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_guest_trip_Trip" Association="Self.FK_guest_trip_Trip">
+      <End Role="Trip" EntitySet="Trip" />
+      <End Role="guest_trip" EntitySet="guest_trip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hall_Occasion" Association="Self.FK_Hall_Occasion">
+      <End Role="Occasion" EntitySet="Occasion" />
+      <End Role="Hall" EntitySet="Hall" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Occasion_Guest" Association="Self.FK_Occasion_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="Occasion" EntitySet="Occasion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Room_Guest" Association="Self.FK_Room_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trainer_Gym" Association="Self.FK_Trainer_Gym">
+      <End Role="Gym" EntitySet="Gym" />
+      <End Role="Trainer" EntitySet="Trainer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
